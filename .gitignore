@@ -1,0 +1,25 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# IDE
+/.idea
+.ruff_cache
+.coverage
+**/.coverage
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Sim results
+sim/results/
+
+# Secrets
+secrets.env
