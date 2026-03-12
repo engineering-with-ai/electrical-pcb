@@ -1,5 +1,8 @@
 # electrical-base
 
+![](https://img.shields.io/gitlab/pipeline-status/engineering-with-ai/electrical-base?branch=main&logo=gitlab)
+![](https://gitlab.com/engineering-with-ai/electrical-base/badges/main/coverage.svg)
+
 RC charging circuit — determines the time constant and steady-state voltage of a series RC circuit driven by a DC source.
 
 The analytical solution V(t) = V_s(1 - e^(-t/RC)) provides exact expected values with propagated uncertainty from component tolerances. The PySpice/ngspice simulation solves the same circuit numerically. Agreement between them validates the model and toolchain — the same pattern used in every engineering template.
