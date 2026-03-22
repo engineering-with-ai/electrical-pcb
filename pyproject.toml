@@ -28,13 +28,15 @@ dev = [
     "pip>=25.1.1",
 ]
 
+# Workflow: checks → notebook → build → sim → inspect (manual PCB layout) → export → validate
+# PCB layout flow: build generates netlist → inspect opens KiCad → import netlist, place, route → commit .kicad_pcb → export
 [tool.poe.tasks]
 format = "black ."
 lint = "ruff check"
 checks = ["format", "lint"]
 notebook = "jupyter nbconvert --execute --inplace theory.ipynb"
 build = { cmd = "python cad/model.py", env = { PYTHONPATH = "." } }
-inspect = "eeschema cad/buck_converter.kicad_sch"
+inspect = "kicad cad/buck_converter.kicad_pro"
 export = "bash -c 'mkdir -p spec/drawings && kicad-cli sch export svg cad/buck_converter.kicad_sch -e -n -o spec/drawings/ && kicad-cli sch export pdf cad/buck_converter.kicad_sch -o spec/drawings/buck_converter.pdf'"
 validate = "kicad-cli sch erc cad/buck_converter.kicad_sch"
 sim = "pytest -vv sim/"

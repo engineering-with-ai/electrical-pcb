@@ -42,6 +42,16 @@ theory.ipynb (sympy + pint) -> cad/model.py (SKiDL -> netlist) -> sim/ (PySpice 
 3. `sim/model.py` builds PySpice netlist and runs switching transient simulation
 4. `sim/test_run.py` asserts steady-state output voltage matches D×Vin within tolerance
 
+### PCB layout flow
+
+PCB layout is a one-time manual step after the netlist is generated:
+
+1. `uv run poe build` — generates `cad/buck_converter.net`
+2. `uv run poe inspect` — opens KiCad project
+3. In KiCad: open pcbnew, import netlist, place components, route traces
+4. Save — commit the `.kicad_pcb` file
+5. `uv run poe export` — kicad-cli exports gerbers, STEP, SVG from the committed PCB
+
 ## Quick Start
 
 ```bash
@@ -50,7 +60,7 @@ uv run poe checks       # ruff format + lint
 uv run poe notebook      # execute theory.ipynb
 uv run poe build         # SKiDL -> KiCad netlist
 uv run poe sim           # pytest
-uv run poe inspect       # open schematic in KiCad
+uv run poe inspect       # open KiCad project (for PCB layout)
 uv run poe export        # SVG + PDF to spec/drawings/
 uv run poe validate      # KiCad ERC
 ```
@@ -62,4 +72,5 @@ uv run poe validate      # KiCad ERC
 - `sim/model.py` — PySpice switching transient simulation
 - `sim/test_run.py` — pytest assertion: output voltage vs D×Vin
 - `cad/model.py` — SKiDL circuit definition → KiCad netlist
-- `spec/drawings/` — exported schematic SVG/PDF
+- `cad/buck_converter.kicad_pro` — KiCad project (schematic + PCB)
+- `spec/drawings/` — exported schematic SVG/PDF, gerbers, STEP
