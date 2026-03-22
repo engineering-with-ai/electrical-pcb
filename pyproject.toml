@@ -13,6 +13,7 @@ dependencies = [
     "pyyaml>=6.0.2",
     "PySpice>=1.5",
     "schemdraw>=0.19",
+    "skidl>=2.0",
 ]
 
 [dependency-groups]
@@ -32,11 +33,10 @@ format = "black ."
 lint = "ruff check"
 checks = ["format", "lint"]
 notebook = "jupyter nbconvert --execute --inplace theory.ipynb"
-sch-theme = "bash -c 'mkdir -p ~/.config/kicad/9.0/colors && cp cad/kicad-spice-theme.json ~/.config/kicad/9.0/colors/engineering.json'"
-schematic = "eeschema cad/rc_charging.kicad_sch"
-sch-svg = "bash -c 'mkdir -p cad/drawings && kicad-cli sch export svg cad/rc_charging.kicad_sch -t engineering -e -n -o cad/drawings/'"
-sch-pdf = "bash -c 'mkdir -p cad/drawings spec && kicad-cli sch export pdf cad/rc_charging.kicad_sch -t engineering -o cad/drawings/rc_charging.pdf && cp cad/drawings/rc_charging.pdf spec/'"
-sch-erc = "kicad-cli sch erc cad/rc_charging.kicad_sch"
+build = { cmd = "python cad/model.py", env = { PYTHONPATH = "." } }
+inspect = "eeschema cad/buck_converter.kicad_sch"
+export = "bash -c 'mkdir -p spec/drawings && kicad-cli sch export svg cad/buck_converter.kicad_sch -e -n -o spec/drawings/ && kicad-cli sch export pdf cad/buck_converter.kicad_sch -o spec/drawings/buck_converter.pdf'"
+validate = "kicad-cli sch erc cad/buck_converter.kicad_sch"
 sim = "pytest -vv sim/"
 cover = "pytest -vv --cov sim/"
 review = "claude 'run code-reviewer agent against diff for quality and elegance'"
