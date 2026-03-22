@@ -241,126 +241,58 @@ analysis = simulator.transient(
 - Convert to numpy arrays for assertion: `np.array([float(v) for v in analysis["output"]])`
 
 
-### KiCad Workflow
+### SKiDL — Circuit Definition in Python
 
-- Schematics live in `cad/` directory with `.kicad_sch` extension
-- Open for editing: `eeschema cad/<name>.kicad_sch`
-- Export to SVG: `kicad-cli sch export svg cad/<name>.kicad_sch -o cad/drawings/`
-- Export to PDF: `kicad-cli sch export pdf cad/<name>.kicad_sch -o cad/drawings/`
-- Run ERC: `kicad-cli sch erc cad/<name>.kicad_sch`
-- Schematic should match the netlist in `sim/model.py` — same topology, same node names, same component values
+Circuits are defined in `cad/model.py` using SKiDL. This is the electrical equivalent of CadQuery — the circuit lives in code, not in a GUI file.
 
-#### Export Formats
-Two export targets — one for web/readme, one for documentation:
-- **SVG (web/readme):** `kicad-cli sch export svg <file> -e -n -o cad/drawings/` — strips drawing sheet border and background for clean embedding
-- **PDF (documentation):** `kicad-cli sch export pdf <file> -o cad/drawings/<name>.pdf` — keeps the professional drawing sheet border with title block
+```python
+import os
+os.environ["KICAD_SYMBOL_DIR"] = "/usr/share/kicad/symbols"
 
-#### Presentable Schematics
-- Center the circuit on the schematic sheet — not crammed in the upper-left corner. For A4 paper, center is approximately (148.5, 105.0) mm
-- Keep the circuit compact — minimize wire lengths, align components on 2.54mm grid
+from skidl import *
 
-#### Visual Review After Generation — Non-Negotiable
-After generating or modifying a KiCad schematic, you MUST visually review it:
-1. Export SVG: `kicad-cli sch export svg <file> -t engineering -e -n -o cad/drawings/`
-2. Convert to PNG: `rsvg-convert -w 1600 cad/drawings/<name>.svg -o /tmp/<name>_review.png`
-3. Read the PNG with the Read tool and inspect for:
-   - Labels overlapping component references or values
-   - Components too close together (need ~20mm between centers for horizontal chains)
-   - Circuit not centered on the page
-   - Wires crossing through component bodies
-4. Fix any issues and re-export before proceeding
+vin, vout, gnd = Net("VIN"), Net("VOUT"), Net("GND")
+r1 = Part("Device", "R", value="1K", footprint="Resistor_SMD:R_0805_2012Metric")
+vin += r1[1]
+vout += r1[2]
 
-
-### KiCad Schematic Generation (.kicad_sch)
-
-KiCad schematics are s-expression files. You can generate them programmatically.
-
-**File structure:**
-```
-(kicad_sch
-  (version 20230121)
-  (generator "claude")
-  (uuid "<sheet-uuid>")
-  (paper "A4")
-  (lib_symbols ...)     ← embedded copies of symbols used
-  (wire ...)            ← wires connecting pins
-  (label ...)           ← net labels (must match sim/model.py node names)
-  (symbol ...)          ← placed component instances
-  (sheet_instances ...)
-)
-```
-
-**Symbol libraries — where to find them:**
-- Standard symbols: `/usr/share/kicad/symbols/`
-- Passive components (R, C, L): `Device.kicad_sym` → lib_id `"Device:R"`, `"Device:C"`, `"Device:L"`
-- SPICE sources and ground: `Simulation_SPICE.kicad_sym` → lib_id `"Simulation_SPICE:VDC"`, `"Simulation_SPICE:0"`
-- Power symbols (VCC, GND): `power.kicad_sym` → lib_id `"power:GND"`, `"power:VCC"`
-
-**Extracting symbol definitions for lib_symbols:**
-Each schematic must embed copies of the symbols it uses. Extract them from the `.kicad_sym` files by parsing the s-expression — find the top-level `(symbol "NAME" ...)` block, prefix with library name for `lib_symbols`.
-
-**Placing a component instance:**
-```
-(symbol (lib_id "Device:R") (at 144.78 55.88 90) (unit 1)
-  (in_bom yes) (on_board yes) (dnp no)
-  (uuid "<component-uuid>")
-  (property "Reference" "R1" (at 144.78 52.07 90)
-    (effects (font (size 1.27 1.27)))
-  )
-  (property "Value" "1k" (at 144.78 54.13 90)
-    (effects (font (size 1.27 1.27)))
-  )
-  (property "Footprint" "" (at ...) (effects (font (size 1.27 1.27)) hide))
-  (property "Datasheet" "~" (at ...) (effects (font (size 1.27 1.27)) hide))
-  (pin "1" (uuid "<pin-uuid>"))
-  (pin "2" (uuid "<pin-uuid>"))
-  (instances
-    (project "<project-name>"
-      (path "/<sheet-uuid>" (reference "R1") (unit 1))
-    )
-  )
-)
+generate_netlist(file_="cad/circuit.net", tool=KICAD8)
 ```
 
 **Key rules:**
-- All coordinates on 2.54mm grid
-- Rotation: 0 = default orientation, 90 = rotated (e.g. horizontal resistor)
-- Every element needs a unique UUID (use `uuid.uuid4()`)
-- Wire endpoints must land exactly on pin positions
-- `(label "node_name" ...)` creates named nets — use these to match `sim/model.py` node names
-- Validate with: `kicad-cli sch export svg <file> -o /tmp/` — if it exports, the format is valid
+- Set `KICAD_SYMBOL_DIR` env var before importing skidl — it needs KiCad symbol libraries
+- Component values come from `sim/constants.py` — strip pint units and uncertainty before passing
+- Footprints must be specified for PCB layout: `footprint="Capacitor_SMD:C_0805_2012Metric"`
+- Net names should match `sim/model.py` node names for traceability
+- `generate_netlist(tool=KICAD8)` outputs KiCad-compatible netlist
 
-**Pin offsets from component origin (at default rotation 0):**
-
-| Symbol | Pin 1 offset | Pin 2 offset |
-|---|---|---|
-| Device:R | (0, -3.81) top | (0, +3.81) bottom |
-| Device:C | (0, -3.81) top | (0, +3.81) bottom |
-| Device:L | (0, -3.81) top | (0, +3.81) bottom |
-| Simulation_SPICE:VDC | (0, -5.08) positive | (0, +5.08) negative |
-| Simulation_SPICE:0 | (0, 0) single pin | — |
-| power:PWR_FLAG | (0, 0) single pin | — |
-
-When rotated 90 degrees, swap x/y offsets. When rotated 180, negate offsets.
-
-**Power symbol connection rule:** Wire endpoints must land exactly on power symbol pin positions. Split long wires into segments that pass through each power pin location — spatial overlap alone does not create a connection.
-
-**PWR_FLAG rule:** Every net with a `power_in` pin (like `Simulation_SPICE:0`) needs a `power:PWR_FLAG` on the same net to satisfy ERC. Place it on the same wire, rotated 180 so it points down toward the wire.
+**Gotcha:** SKiDL's `isinstance(nid, int)` check fails on numpy int64. Cast to `int()` when passing numeric IDs.
 
 
-### schemdraw for Documentation
+### KiCad Workflow
 
-Use schemdraw for quick circuit diagrams in notebooks and readmes when a full KiCad schematic is overkill:
-```python
-import schemdraw
-import schemdraw.elements as elm
+Deliverables export to `spec/drawings/` via CLI:
+- Schematic SVG: `kicad-cli sch export svg cad/<name>.kicad_sch -e -n -o spec/drawings/`
+- Schematic PDF: `kicad-cli sch export pdf cad/<name>.kicad_sch -o spec/drawings/<name>.pdf`
+- PCB gerbers: `kicad-cli pcb export gerbers cad/<name>.kicad_pcb -o spec/drawings/gerbers/`
+- PCB STEP: `kicad-cli pcb export step cad/<name>.kicad_pcb -o spec/drawings/<name>.step`
+- ERC: `kicad-cli sch erc cad/<name>.kicad_sch`
+- DRC: `kicad-cli pcb drc cad/<name>.kicad_pcb`
 
-with schemdraw.Drawing() as d:
-    d += elm.SourceV().label("V_s")
-    d += elm.Resistor().right().label("R")
-    d += elm.Capacitor().down().label("C")
-    d += elm.Line().left()
-```
+**PCB layout is manual** — open in pcbnew (`kicad cad/<name>.kicad_pro`), place components, route traces, commit the `.kicad_pcb` file. Automation handles everything else.
+
+
+### Poe Tasks (standardized across all templates)
+
+| Task | Command | What it does |
+|------|---------|-------------|
+| checks | `uv run poe checks` | ruff format + lint |
+| notebook | `uv run poe notebook` | execute theory.ipynb |
+| build | `uv run poe build` | SKiDL → KiCad netlist |
+| sim | `uv run poe sim` | PySpice + pytest |
+| inspect | `uv run poe inspect` | open KiCad project GUI |
+| export | `uv run poe export` | schematic/PCB → SVG, PDF, gerbers |
+| validate | `uv run poe validate` | KiCad ERC + DRC |
 
 
 ### SPICE Gotchas
