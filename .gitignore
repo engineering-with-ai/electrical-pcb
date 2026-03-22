@@ -23,3 +23,7 @@ sim/results/
 
 # Secrets
 secrets.env
+*.erc
+*.log
+*_sklib.py
+skidl_REPL.*
