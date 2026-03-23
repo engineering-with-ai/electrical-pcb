@@ -38,9 +38,9 @@ checks = ["format", "lint"]
 notebook = "jupyter nbconvert --execute --inplace theory.ipynb"
 build = { cmd = "python cad/model.py", env = { PYTHONPATH = "." } }
 inspect-model = "bash -c 'nohup eeschema cad/buck_converter.kicad_sch &>/dev/null &'"
-validate-model = "kicad-cli sch erc cad/buck_converter.kicad_sch"
+validate-model = "bash -c 'kicad-cli sch erc cad/buck_converter.kicad_sch && if [ -f cad/buck_converter.kicad_pcb ]; then kicad-cli pcb drc cad/buck_converter.kicad_pcb; fi'"
 inspect-asm = "bash -c 'nohup kicad cad/buck_converter.kicad_pro &>/dev/null &'"
-drawings = "bash -c 'mkdir -p spec/drawings && kicad-cli sch export svg cad/buck_converter.kicad_sch -b -e -n -o spec/drawings/ && kicad-cli sch export pdf cad/buck_converter.kicad_sch -b --drawing-sheet cad/drawing-sheet.kicad_wks -o spec/drawings/buck_converter.pdf'"
+drawings = "bash -c 'mkdir -p spec/drawings/gerbers && kicad-cli sch export svg cad/buck_converter.kicad_sch -b -e -n -o spec/drawings/ && kicad-cli sch export pdf cad/buck_converter.kicad_sch -b --drawing-sheet cad/drawing-sheet.kicad_wks -o spec/drawings/buck_converter.pdf && if [ -f cad/buck_converter.kicad_pcb ]; then kicad-cli pcb export gerbers cad/buck_converter.kicad_pcb -o spec/drawings/gerbers/ && kicad-cli pcb export drill cad/buck_converter.kicad_pcb -o spec/drawings/gerbers/ && kicad-cli pcb export step cad/buck_converter.kicad_pcb -o spec/drawings/buck_converter_pcb.step && kicad-cli pcb export svg cad/buck_converter.kicad_pcb -l F.Cu,B.Cu,Edge.Cuts,F.Silkscreen --black-and-white --exclude-drawing-sheet --page-size-mode 2 --mode-single -o spec/drawings/buck_converter_pcb.svg; fi'"
 sim = "pytest -vv sim/"
 cover = "pytest -vv --cov sim/"
 review = "claude 'run code-reviewer agent against diff for quality and elegance'"
