@@ -27,3 +27,10 @@ secrets.env
 *.log
 *_sklib.py
 skidl_REPL.*
+
+# KiCad temp files
+*.kicad_prl
+*-backups/
+*.lck
+fp-info-cache
+*-erc.rpt
