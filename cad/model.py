@@ -59,8 +59,8 @@ def build_netlist() -> None:
     vin += c_in[1]
     gnd += c_in[2]
 
-    q_sw = skidl.Part("Device", "Q_NMOS", footprint="Package_TO_SOT_SMD:SOT-23")
-    q_sw.value = "SW"
+    q_sw = skidl.Part("Transistor_FET", "2N7002", footprint="Package_TO_SOT_SMD:SOT-23")
+    q_sw.value = "2N7002"
     vin += q_sw["D"]
     sw += q_sw["S"]
     gate += q_sw["G"]
@@ -128,16 +128,22 @@ def build_schematic() -> None:
     )
 
     # Components — pin positions noted for wiring
+    # Footprints must match build_netlist() for PCB import
     # C1 at p(0,10):   Pin1=p(0,7)   Pin2=p(0,13)
-    sch.components.add("Device:C", "C1", vals["c_in"], position=p(0, 10))
+    c1 = sch.components.add("Device:C", "C1", vals["c_in"], position=p(0, 10))
+    c1.footprint = "Capacitor_SMD:C_0805_2012Metric"
     # Q1 at p(10,6):   Gate=p(6,6)   Drain=p(12,2)  Source=p(12,10)
-    sch.components.add("Device:Q_NMOS", "Q1", "SW", position=p(10, 6))
+    q1 = sch.components.add("Transistor_FET:2N7002", "Q1", "2N7002", position=p(10, 6))
+    q1.footprint = "Package_TO_SOT_SMD:SOT-23"
     # D1 at p(15,14):  K=p(12,14)    A=p(18,14)
-    sch.components.add("Device:D_Schottky", "D1", "SS14", position=p(15, 14))
+    d1 = sch.components.add("Device:D_Schottky", "D1", "SS14", position=p(15, 14))
+    d1.footprint = "Diode_SMD:D_SOD-123"
     # L1 at p(25,4):   Pin1=p(22,4)  Pin2=p(28,4)
-    sch.components.add("Device:L", "L1", vals["l"], position=p(25, 4), rotation=90)
+    l1 = sch.components.add("Device:L", "L1", vals["l"], position=p(25, 4), rotation=90)
+    l1.footprint = "Inductor_SMD:L_1210_3225Metric"
     # C2 at p(35,10):  Pin1=p(35,7)  Pin2=p(35,13)
-    sch.components.add("Device:C", "C2", vals["c_out"], position=p(35, 10))
+    c2 = sch.components.add("Device:C", "C2", vals["c_out"], position=p(35, 10))
+    c2.footprint = "Capacitor_SMD:C_0805_2012Metric"
 
     # Junctions
     sch.junctions.add(position=p(0, 2))

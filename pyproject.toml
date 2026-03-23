@@ -39,7 +39,7 @@ notebook = "jupyter nbconvert --execute --inplace theory.ipynb"
 build = { cmd = "python cad/model.py", env = { PYTHONPATH = "." } }
 inspect-model = "bash -c 'nohup eeschema cad/buck_converter.kicad_sch &>/dev/null &'"
 validate-model = "kicad-cli sch erc cad/buck_converter.kicad_sch"
-inspect-asm = "bash -c 'nohup pcbnew cad/buck_converter.kicad_pcb &>/dev/null & || echo \"Run poe build, then layout PCB in KiCad first\"'"
+inspect-asm = "bash -c 'nohup kicad cad/buck_converter.kicad_pro &>/dev/null &'"
 drawings = "bash -c 'mkdir -p spec/drawings && kicad-cli sch export svg cad/buck_converter.kicad_sch -b -e -n -o spec/drawings/ && kicad-cli sch export pdf cad/buck_converter.kicad_sch -b --drawing-sheet cad/drawing-sheet.kicad_wks -o spec/drawings/buck_converter.pdf'"
 sim = "pytest -vv sim/"
 cover = "pytest -vv --cov sim/"

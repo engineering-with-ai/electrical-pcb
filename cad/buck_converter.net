@@ -2,7 +2,7 @@
   (version "D")
   (design
     (source "model.py")
-    (date "03/22/2026 08:30 PM")
+    (date "03/22/2026 09:10 PM")
     (tool "SKiDL (2.2.1)")
     (sheet
       (number 1)
@@ -55,7 +55,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "u359GGOUt2")
+          (name "SKiDL Tag") "asicCuamnp")
         (field
           (name "SKiDL Line") "model.py:56"))
       (libsource
@@ -64,7 +64,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "762fbd66-d07f-5f69-aca6-61a21867b02b"))
+      (tstamps "ebb3ff5e-ee44-521c-a1fc-154af289a5b4"))
     (comp
       (ref "C2")
       (value "22uF")
@@ -78,7 +78,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "GqY2S0gmZL")
+          (name "SKiDL Tag") "FVsfSpORQi")
         (field
           (name "SKiDL Line") "model.py:79"))
       (libsource
@@ -87,7 +87,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "9e9c6006-e455-5fe8-b281-21229bec97ac"))
+      (tstamps "9391408a-f183-5b3d-a685-844f69cd5b17"))
     (comp
       (ref "D1")
       (value "SS14")
@@ -101,7 +101,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "QyJJWSXKI4")
+          (name "SKiDL Tag") "ePn035vYOs")
         (field
           (name "SKiDL Line") "model.py:68"))
       (libsource
@@ -110,7 +110,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "d79f5c82-2634-57f9-8f52-8c3f48e62513"))
+      (tstamps "ed9c471e-01cd-5f49-94bb-3763081a356f"))
     (comp
       (ref "J1")
       (value "VIN")
@@ -124,7 +124,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "11phFaEDUf")
+          (name "SKiDL Tag") "SwOTllvdun")
         (field
           (name "SKiDL Line") "model.py:47"))
       (libsource
@@ -133,7 +133,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "6b9f0e58-e020-526f-b50d-df76f0f65100"))
+      (tstamps "7304382b-2bc5-50b3-b0e0-885acfcef981"))
     (comp
       (ref "J2")
       (value "VOUT")
@@ -147,7 +147,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "_Th7SOiZAG")
+          (name "SKiDL Tag") "3UnolvrlR9")
         (field
           (name "SKiDL Line") "model.py:85"))
       (libsource
@@ -156,7 +156,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "face484b-7e26-5ee2-9e4a-ba1199e2aa65"))
+      (tstamps "f129fdaf-35eb-5514-bd58-f056d8d4039f"))
     (comp
       (ref "L1")
       (value "22uH")
@@ -170,7 +170,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "sp0LbR2MwG")
+          (name "SKiDL Tag") "Hjc3yoK_HW")
         (field
           (name "SKiDL Line") "model.py:73"))
       (libsource
@@ -179,30 +179,30 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "44742c94-809b-5fda-91d5-9069e2986253"))
+      (tstamps "e41af3d3-b9c8-54ca-82db-7bac6a3a4573"))
     (comp
       (ref "Q1")
-      (value "SW")
-      (description "N-MOSFET transistor")
+      (value "2N7002")
+      (description "0.115A Id, 60V Vds, N-Channel MOSFET, SOT-23")
       (footprint "Package_TO_SOT_SMD:SOT-23")
       (fields
         (field
-          (name "Description") "N-MOSFET transistor")
+          (name "Description") "0.115A Id, 60V Vds, N-Channel MOSFET, SOT-23")
         (field
           (name "Footprint") "Package_TO_SOT_SMD:SOT-23")
         (field
-          (name "Datasheet") "~")
+          (name "Datasheet") "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF")
         (field
-          (name "SKiDL Tag") "YrCV3Gls1V")
+          (name "SKiDL Tag") "DX7Sdvom5O")
         (field
           (name "SKiDL Line") "model.py:62"))
       (libsource
-        (lib "Device")
-        (part "Q_NMOS"))
+        (lib "Transistor_FET")
+        (part "2N7002"))
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "781bacc8-a7e2-5f90-8e8d-28023bc991da")))
+      (tstamps "6b8b6da0-d93f-5fcb-ac31-93bab174a15a")))
   (nets
     (net
       (code 1)
@@ -210,7 +210,7 @@
       (class "Default")
       (node
         (ref "Q1")
-        (pin "G")
+        (pin "1")
         (pintype "INPUT")))
     (net
       (code 2)
@@ -250,7 +250,7 @@
         (pintype "PASSIVE"))
       (node
         (ref "Q1")
-        (pin "S")
+        (pin "2")
         (pintype "PASSIVE")))
     (net
       (code 4)
@@ -266,7 +266,7 @@
         (pintype "PASSIVE"))
       (node
         (ref "Q1")
-        (pin "D")
+        (pin "3")
         (pintype "PASSIVE")))
     (net
       (code 5)
