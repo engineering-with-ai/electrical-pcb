@@ -282,17 +282,47 @@ Deliverables export to `spec/drawings/` via CLI:
 **PCB layout is manual** — open in pcbnew (`kicad cad/<name>.kicad_pro`), place components, route traces, commit the `.kicad_pcb` file. Automation handles everything else.
 
 
+### kicad-sch-api — Schematic Generation
+
+**Pin offsets (grid units) from component position:**
+
+| Symbol | Pin | Offset |
+|---|---|---|
+| Device:Q_NMOS | Gate | (-4, 0) |
+| Device:Q_NMOS | Drain | (+2, -4) |
+| Device:Q_NMOS | Source | (+2, +4) |
+| Device:D_Schottky | K (cathode) | (-3, 0) |
+| Device:D_Schottky | A (anode) | (+3, 0) |
+| Device:C | Pin 1 | (0, -3) |
+| Device:C | Pin 2 | (0, +3) |
+| Device:L | Pin 1 | (0, -3) |
+| Device:L | Pin 2 | (0, +3) |
+| Device:L (rot 90) | Pin 1 | (-3, 0) |
+| Device:L (rot 90) | Pin 2 | (+3, 0) |
+| power:+12V / power:GND | Pin | (0, 0) |
+
+**Key rules:**
+- Wire endpoints must land exactly on pin positions — spatial overlap alone does not create a connection
+- `PWR_FLAG` on VIN and GND nets satisfies ERC "power pin not driven" for connector-fed designs
+- `no_connects.add()` does NOT respect `use_grid_units()` — pass mm coordinates directly
+- Use `sch.get_component_pin_position()` when available to avoid manual offset math
+
+
 ### Poe Tasks (standardized across all templates)
 
-| Task | Command | What it does |
-|------|---------|-------------|
-| checks | `uv run poe checks` | ruff format + lint |
-| notebook | `uv run poe notebook` | execute theory.ipynb |
-| build | `uv run poe build` | SKiDL → KiCad netlist |
-| sim | `uv run poe sim` | PySpice + pytest |
-| inspect | `uv run poe inspect` | open KiCad project GUI |
-| export | `uv run poe export` | schematic/PCB → SVG, PDF, gerbers |
-| validate | `uv run poe validate` | KiCad ERC + DRC |
+| Task | What it does |
+|------|-------------|
+| checks | ruff format + lint |
+| notebook | execute theory.ipynb |
+| build | generate code-driven artifacts (netlist+schematic) |
+| sim | simulation + pytest assertions |
+| validate-model | design rule checks (ERC) |
+| inspect-model | open single model GUI (schematic) |
+| inspect-asm | open assembly GUI (PCB when available) |
+| drawings | export SVG/PDF to spec/drawings/ |
+| cover | pytest + coverage |
+| review | AI code review |
+| commit | full pipeline → push |
 
 
 ### SPICE Gotchas

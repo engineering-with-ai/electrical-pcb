@@ -14,7 +14,9 @@ V_OUT: Final = 3.3 * ureg.V  # target output voltage
 I_LOAD: Final = 1.0 * ureg.A  # max load current
 
 # --- Switching ---
-F_SW: Final = 500.0 * ureg.kHz  # switching frequency, typical for integrated buck ICs
+F_SW: Final = (
+    500.0 * ureg.kHz
+)  # conventional sweet spot: fast enough for small L/C, slow enough for manageable switching losses
 
 # --- Ripple specs ---
 # Reason: 1% output voltage ripple and 30% inductor current ripple are common targets

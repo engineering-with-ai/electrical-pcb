@@ -2,7 +2,7 @@
   (version "D")
   (design
     (source "model.py")
-    (date "03/21/2026 11:02 PM")
+    (date "03/22/2026 08:30 PM")
     (tool "SKiDL (2.2.1)")
     (sheet
       (number 1)
@@ -55,16 +55,16 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "cNNx_HHDvi")
+          (name "SKiDL Tag") "u359GGOUt2")
         (field
-          (name "SKiDL Line") "model.py:46"))
+          (name "SKiDL Line") "model.py:56"))
       (libsource
         (lib "Device")
         (part "C"))
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "6f48b7e3-5168-5826-904b-bbe2f70b46c1"))
+      (tstamps "762fbd66-d07f-5f69-aca6-61a21867b02b"))
     (comp
       (ref "C2")
       (value "22uF")
@@ -78,16 +78,16 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "JGhsS1KlwK")
+          (name "SKiDL Tag") "GqY2S0gmZL")
         (field
-          (name "SKiDL Line") "model.py:65"))
+          (name "SKiDL Line") "model.py:79"))
       (libsource
         (lib "Device")
         (part "C"))
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "fcbc3b19-392e-52f8-b32a-fda38b114223"))
+      (tstamps "9e9c6006-e455-5fe8-b281-21229bec97ac"))
     (comp
       (ref "D1")
       (value "SS14")
@@ -101,16 +101,16 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "4grIrXVP5z")
+          (name "SKiDL Tag") "QyJJWSXKI4")
         (field
-          (name "SKiDL Line") "model.py:56"))
+          (name "SKiDL Line") "model.py:68"))
       (libsource
         (lib "Device")
         (part "D_Schottky"))
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "22df52f3-6ecd-53a5-a9d5-6004015c7b03"))
+      (tstamps "d79f5c82-2634-57f9-8f52-8c3f48e62513"))
     (comp
       (ref "J1")
       (value "VIN")
@@ -124,16 +124,16 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "P6duYM9u2O")
+          (name "SKiDL Tag") "11phFaEDUf")
         (field
-          (name "SKiDL Line") "model.py:41"))
+          (name "SKiDL Line") "model.py:47"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_01x02"))
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "5187e7a6-4994-5218-a89f-6accc1b39cd9"))
+      (tstamps "6b9f0e58-e020-526f-b50d-df76f0f65100"))
     (comp
       (ref "J2")
       (value "VOUT")
@@ -147,16 +147,16 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "oKG6NL1MPN")
+          (name "SKiDL Tag") "_Th7SOiZAG")
         (field
-          (name "SKiDL Line") "model.py:69"))
+          (name "SKiDL Line") "model.py:85"))
       (libsource
         (lib "Connector_Generic")
         (part "Conn_01x02"))
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "71744cd3-8086-563b-bf8f-2cc82a47a608"))
+      (tstamps "face484b-7e26-5ee2-9e4a-ba1199e2aa65"))
     (comp
       (ref "L1")
       (value "22uH")
@@ -170,16 +170,16 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "OIVwXN8t7D")
+          (name "SKiDL Tag") "sp0LbR2MwG")
         (field
-          (name "SKiDL Line") "model.py:61"))
+          (name "SKiDL Line") "model.py:73"))
       (libsource
         (lib "Device")
         (part "L"))
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "4553c6db-8cc7-55be-81d7-093b3611e6fd"))
+      (tstamps "44742c94-809b-5fda-91d5-9069e2986253"))
     (comp
       (ref "Q1")
       (value "SW")
@@ -193,16 +193,16 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "L3wHlwXkTB")
+          (name "SKiDL Tag") "YrCV3Gls1V")
         (field
-          (name "SKiDL Line") "model.py:50"))
+          (name "SKiDL Line") "model.py:62"))
       (libsource
         (lib "Device")
         (part "Q_NMOS"))
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "54061222-884b-53f3-8664-156aae08b1ca")))
+      (tstamps "781bacc8-a7e2-5f90-8e8d-28023bc991da")))
   (nets
     (net
       (code 1)

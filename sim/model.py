@@ -7,7 +7,7 @@ Diode provides freewheeling path when switch is off.
 import numpy as np
 from numpy.typing import NDArray
 from PySpice.Spice.Netlist import Circuit
-from PySpice.Unit import u_A, u_kHz, u_Ohm, u_uF, u_uH, u_us, u_V
+from PySpice.Unit import u_Ohm, u_uF, u_uH, u_us, u_V
 
 from sim.constants import (
     DUTY_CYCLE,
@@ -35,9 +35,13 @@ def build_circuit() -> Circuit:
     f = F_SW.to("kHz").magnitude
     period_us = 1e3 / f  # period in microseconds
 
-    # Reason: pulse source models ideal switch — ON for D*T, OFF for (1-D)*T
+    # Reason: pulse source models ideal switch — ON for D*T, OFF for (1-D)*T.
+    # PySpice has circuit.MOSFET() but that needs gate driver, SPICE model params,
+    # and 10x slower sim — all for the same steady-state result within our 10% tolerance.
     circuit.PulseVoltageSource(
-        "sw", "switch", circuit.gnd,
+        "sw",
+        "switch",
+        circuit.gnd,
         initial_value=0 @ u_V,
         pulsed_value=vin @ u_V,
         delay_time=0 @ u_us,
@@ -51,8 +55,8 @@ def build_circuit() -> Circuit:
     circuit.D("1", circuit.gnd, "switch_l", model="DIODE")
     circuit.model("DIODE", "D", IS=1e-14, N=1.0, BV=100)
 
-    l = INDUCTANCE.magnitude.nominal_value
-    circuit.L("1", "switch", "output", l @ u_uH)
+    inductance = INDUCTANCE.magnitude.nominal_value
+    circuit.L("1", "switch", "output", inductance @ u_uH)
 
     # Reason: wire from switch node to inductor and diode must be same net
     circuit.R("wire", "switch", "switch_l", 1e-3 @ u_Ohm)

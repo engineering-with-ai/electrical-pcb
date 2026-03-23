@@ -47,22 +47,23 @@ theory.ipynb (sympy + pint) -> cad/model.py (SKiDL -> netlist) -> sim/ (PySpice 
 PCB layout is a one-time manual step after the netlist is generated:
 
 1. `uv run poe build` — generates `cad/buck_converter.net`
-2. `uv run poe inspect` — opens KiCad project
+2. `uv run poe inspect-model` — opens KiCad project
 3. In KiCad: open pcbnew, import netlist, place components, route traces
 4. Save — commit the `.kicad_pcb` file
-5. `uv run poe export` — kicad-cli exports gerbers, STEP, SVG from the committed PCB
+5. `uv run poe drawings` — kicad-cli exports gerbers, STEP, SVG from the committed PCB
 
 ## Quick Start
 
 ```bash
 uv sync
-uv run poe checks       # ruff format + lint
-uv run poe notebook      # execute theory.ipynb
-uv run poe build         # SKiDL -> KiCad netlist
-uv run poe sim           # pytest
-uv run poe inspect       # open KiCad project (for PCB layout)
-uv run poe export        # SVG + PDF to spec/drawings/
-uv run poe validate      # KiCad ERC
+uv run poe checks          # ruff format + lint
+uv run poe notebook         # execute theory.ipynb
+uv run poe build            # SKiDL -> KiCad netlist
+uv run poe sim              # pytest
+uv run poe validate-model   # KiCad ERC
+uv run poe inspect-model    # open KiCad project (for PCB layout)
+uv run poe inspect-asm      # open PCB in pcbnew
+uv run poe drawings         # SVG + PDF to spec/drawings/
 ```
 
 ## Structure

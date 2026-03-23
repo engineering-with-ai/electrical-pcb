@@ -1,6 +1,5 @@
 """Assert buck converter simulation matches analytical expected values."""
 
-import numpy as np
 import pytest
 
 from sim.constants import DUTY_CYCLE, V_IN, ureg
@@ -21,7 +20,7 @@ class TestBuckConverter:
         expected_v = _expected_output_voltage()
 
         # act
-        time_us, v_out = simulate()
+        _time_us, v_out = simulate()
         # Reason: use last 10% of sim for steady-state average
         steady = v_out[int(len(v_out) * 0.9) :]
         actual_v = steady.mean()
