@@ -1,7 +1,7 @@
-# electrical-base
+# electrical-pcb
 
-![](https://img.shields.io/gitlab/pipeline-status/engineering-with-ai/electrical-base?branch=main&logo=gitlab)
-![](https://gitlab.com/engineering-with-ai/electrical-base/badges/main/coverage.svg)
+![](https://img.shields.io/gitlab/pipeline-status/engineering-with-ai/electrical-pcb?branch=main&logo=gitlab)
+![](https://gitlab.com/engineering-with-ai/electrical-pcb/badges/main/coverage.svg)
 
 Buck converter (12V→3.3V, 500kHz) — showcases the full EE toolchain: theory derivation, SPICE simulation, SKiDL schematic generation, and KiCad PCB export.
 
