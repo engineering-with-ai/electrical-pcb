@@ -1,4 +1,9 @@
-"""Buck converter parameters with units and tolerances."""
+"""Physical parameters for CM4 carrier board design.
+
+General-purpose CM4 carrier: 5V screw terminal input with polyfuse and
+reverse polarity protection, CP2102N USB-UART debug, I2C + SPI + RS-485
+(MAX3485) + GPIO headers on 2.54mm pitch, 100x80mm 2-layer board.
+"""
 
 from typing import Final
 
@@ -8,35 +13,50 @@ from uncertainties import ufloat
 ureg = pint.UnitRegistry()
 Q_ = ureg.Quantity
 
-# --- Input / Output spec ---
-V_IN: Final = 12.0 * ureg.V  # DC input supply
-V_OUT: Final = 3.3 * ureg.V  # target output voltage
-I_LOAD: Final = 1.0 * ureg.A  # max load current
+# --- Board geometry ---
+BOARD_WIDTH: Final = 100.0 * ureg.mm
+BOARD_HEIGHT: Final = 80.0 * ureg.mm
 
-# --- Switching ---
-F_SW: Final = (
-    500.0 * ureg.kHz
-)  # conventional sweet spot: fast enough for small L/C, slow enough for manageable switching losses
+# --- Power input ---
+V_IN: Final = 5.0 * ureg.V  # Screw terminal, nominal 5V DC
 
-# --- Ripple specs ---
-# Reason: 1% output voltage ripple and 30% inductor current ripple are common targets
-DELTA_V_OUT: Final = 0.033 * ureg.V  # 1% of V_OUT
-RIPPLE_RATIO: Final = 0.30 * ureg.dimensionless  # peak-to-peak ΔI / I_LOAD
+# --- CM4 load profile ---
+# Reason: RPi CM4 datasheet + community measurements (forums.raspberrypi.com)
+I_STANDBY: Final = 0.3 * ureg.A  # Idle, no peripherals
+I_TYPICAL: Final = 1.4 * ureg.A  # Normal operation, moderate CPU
+I_PEAK: Final = 3.0 * ureg.A  # Boot surge + USB + stress test
 
-# --- Derived: duty cycle ---
-# D = V_OUT / V_IN (ideal, CCM)
-DUTY_CYCLE: Final = (V_OUT / V_IN).to(ureg.dimensionless)
+# --- Polyfuse: Littelfuse 1812L200, 1812 package ---
+# Reason: Littelfuse 1812L series datasheet, I_hold = 2A variant
+I_HOLD: Final = 2.0 * ureg.A  # Max current without trip (20°C still air)
+I_TRIP: Final = 4.0 * ureg.A  # Min current that causes trip
+R_POLYFUSE: Final = ufloat(0.050, 0.010) * ureg.ohm  # Typical ±20%
 
-# --- Component values ---
-# L = V_OUT * (1 - D) / (f_sw * ΔI_L)
-# ΔI_L = RIPPLE_RATIO * I_LOAD
-DELTA_I_L: Final = (RIPPLE_RATIO * I_LOAD).to(ureg.A)
-INDUCTANCE: Final = ufloat(22.0, 2.2) * ureg.uH  # 22 uH ±10%, shielded power inductor
-# Reason: calculated minimum ~18.2 uH, 22 uH is next standard value (E12)
+# --- Reverse polarity MOSFET: SI2301 P-channel, SOT-23 ---
+# Reason: MCC SI2301 datasheet Rev.4-10222024
+V_GS_TH: Final = ufloat(-0.45, 0.15) * ureg.V  # Gate threshold max
+RDS_ON: Final = ufloat(0.085, 0.015) * ureg.ohm  # At Vgs=-4.5V, Id=-3A
 
-# C_OUT = ΔI_L / (8 * f_sw * ΔV_OUT)
-OUTPUT_CAP: Final = ufloat(22.0, 4.4) * ureg.uF  # 22 uF ±20%, MLCC X5R
-# Reason: calculated minimum ~5.7 uF, 22 uF provides margin for DC bias derating
+# --- Voltage budget ---
+# Reason: V_rail = V_in - I x R_polyfuse - I x Rds_on - I x R_trace
+R_TRACE: Final = ufloat(0.020, 0.005) * ureg.ohm  # PCB trace estimate
+V_CM4_MIN: Final = 4.75 * ureg.V  # CM4 minimum input (USB-C spec)
 
-INPUT_CAP: Final = ufloat(10.0, 2.0) * ureg.uF  # 10 uF ±20%, MLCC X5R
-# Reason: input cap sized for RMS ripple current handling
+# --- RS-485: MAX3485 transceiver, SO-8 ---
+# Reason: Analog Devices MAX3485E datasheet, Table 1
+Z0: Final = 120.0 * ureg.ohm  # Twisted pair characteristic impedance
+R_TERM: Final = 120.0 * ureg.ohm  # Termination = Z0
+# Reason: failsafe bias — idle bus defined state, receiver threshold ±200mV
+R_BIAS: Final = 560.0 * ureg.ohm  # A→VCC and B→GND bias resistors
+V_DIFF_TH: Final = 0.2 * ureg.V  # Receiver differential sensitivity
+
+# --- I2C: fast mode 400kHz, 4-device bus ---
+# Reason: NXP I2C spec UM10204, Rev. 7.0, Table 10 (fast-mode)
+F_SCL: Final = 400.0 * ureg.kHz
+T_RISE_MAX: Final = 300.0 * ureg.ns  # Max rise time, fast mode
+C_BUS: Final = ufloat(100.0, 20.0) * ureg.pF  # 4 devices + traces
+V_PULLUP: Final = 3.3 * ureg.V  # I2C supply
+I_SINK: Final = 3.0 * ureg.mA  # Fast mode sink current
+V_OL: Final = 0.4 * ureg.V  # I2C output low threshold
+# Derived: R_min = (Vcc - Vol) / I_sink, R_max = t_rise / (0.8473 x C_bus)
+R_PULLUP: Final = 2.2 * ureg.kohm  # E24 standard, within calculated range
