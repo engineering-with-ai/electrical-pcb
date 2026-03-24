@@ -130,3 +130,10 @@ def _build_decoupling(v3v3: skidl.Net, gnd: skidl.Net, count: int) -> None:
 if __name__ == "__main__":
     build_netlist()
     print(f"Netlist: {NETLIST_PATH}")
+
+    from cad.schematic import build_schematic
+
+    build_schematic()
+    from cad.schematic import SCHEMATIC_PATH
+
+    print(f"Schematic: {SCHEMATIC_PATH}")
