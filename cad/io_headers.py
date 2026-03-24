@@ -38,8 +38,12 @@ def build_i2c_header(
 
 
 def build_spi_header(
-    mosi: skidl.Net, miso: skidl.Net, sck: skidl.Net, cs: skidl.Net,
-    v3v3: skidl.Net, gnd: skidl.Net,
+    mosi: skidl.Net,
+    miso: skidl.Net,
+    sck: skidl.Net,
+    cs: skidl.Net,
+    v3v3: skidl.Net,
+    gnd: skidl.Net,
 ) -> None:
     """Wire SPI header — 6-pin: VCC, MOSI, MISO, SCK, CS, GND."""
     j_spi = skidl.Part(

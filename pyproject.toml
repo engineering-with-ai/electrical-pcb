@@ -29,18 +29,18 @@ dev = [
     "pip>=25.1.1",
 ]
 
-# Workflow: checks → notebook → build → sim → inspect (manual PCB layout) → export → validate
-# PCB layout flow: build generates netlist → inspect opens KiCad → import netlist, place, route → commit .kicad_pcb → export
+# Workflow: checks → notebook → build → sim → validate → inspect → drawings
+# PCB layout flow: build generates netlist → inspect-asm opens KiCad → place, route → commit .kicad_pcb → drawings
 [tool.poe.tasks]
 format = "black ."
 lint = "ruff check"
 checks = ["format", "lint"]
 notebook = "jupyter nbconvert --execute --inplace theory.ipynb"
 build = { cmd = "python cad/model.py", env = { PYTHONPATH = "." } }
-inspect-model = "bash -c 'nohup eeschema cad/buck_converter.kicad_sch &>/dev/null &'"
-validate-model = "bash -c 'kicad-cli sch erc cad/buck_converter.kicad_sch && if [ -f cad/buck_converter.kicad_pcb ]; then kicad-cli pcb drc cad/buck_converter.kicad_pcb; fi'"
-inspect-asm = "bash -c 'nohup kicad cad/buck_converter.kicad_pro &>/dev/null &'"
-drawings = "bash -c 'mkdir -p spec/drawings/gerbers && kicad-cli sch export svg cad/buck_converter.kicad_sch -b -e -n -o spec/drawings/ && kicad-cli sch export pdf cad/buck_converter.kicad_sch -b --drawing-sheet cad/drawing-sheet.kicad_wks -o spec/drawings/buck_converter.pdf && if [ -f cad/buck_converter.kicad_pcb ]; then kicad-cli pcb export gerbers cad/buck_converter.kicad_pcb -o spec/drawings/gerbers/ && kicad-cli pcb export drill cad/buck_converter.kicad_pcb -o spec/drawings/gerbers/ && kicad-cli pcb export step cad/buck_converter.kicad_pcb -o spec/drawings/buck_converter_pcb.step && kicad-cli pcb export svg cad/buck_converter.kicad_pcb -l F.Cu,B.Cu,Edge.Cuts,F.Silkscreen --black-and-white --exclude-drawing-sheet --page-size-mode 2 --mode-single -o spec/drawings/buck_converter_pcb.svg; fi'"
+inspect-model = "bash -c 'nohup eeschema cad/cm4_carrier.kicad_sch &>/dev/null &'"
+validate-model = "bash -c 'kicad-cli sch erc cad/cm4_carrier.kicad_sch && if [ -f cad/cm4_carrier.kicad_pcb ]; then kicad-cli pcb drc cad/cm4_carrier.kicad_pcb; fi'"
+inspect-asm = "bash -c 'nohup kicad cad/cm4_carrier.kicad_pro &>/dev/null &'"
+drawings = "bash -c 'mkdir -p spec/drawings/gerbers && kicad-cli sch export svg cad/cm4_carrier.kicad_sch -b -e -n -o spec/drawings/ && kicad-cli sch export pdf cad/cm4_carrier.kicad_sch -b --drawing-sheet cad/drawing-sheet.kicad_wks -o spec/drawings/cm4_carrier.pdf && if [ -f cad/cm4_carrier.kicad_pcb ]; then kicad-cli pcb export gerbers cad/cm4_carrier.kicad_pcb -o spec/drawings/gerbers/ && kicad-cli pcb export drill cad/cm4_carrier.kicad_pcb -o spec/drawings/gerbers/ && kicad-cli pcb export step cad/cm4_carrier.kicad_pcb -o spec/drawings/cm4_carrier_pcb.step && kicad-cli pcb export svg cad/cm4_carrier.kicad_pcb -l F.Cu,B.Cu,Edge.Cuts,F.Silkscreen --black-and-white --exclude-drawing-sheet --page-size-mode 2 --mode-single -o spec/drawings/cm4_carrier_pcb.svg; fi'"
 sim = "pytest -vv sim/"
 cover = "pytest -vv --cov sim/"
 review = "claude 'run code-reviewer agent against diff for quality and elegance'"

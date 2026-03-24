@@ -6,7 +6,6 @@
 import skidl
 
 
-
 def build_power(v5_in: skidl.Net, v5_rail: skidl.Net, gnd: skidl.Net) -> None:
     """Wire power input protection between screw terminal and 5V rail."""
     # Screw terminal — 5.08mm pitch, 2-position
@@ -20,9 +19,7 @@ def build_power(v5_in: skidl.Net, v5_rail: skidl.Net, gnd: skidl.Net) -> None:
     gnd += j_pwr[2]
 
     # Polyfuse — Littelfuse 1812L200
-    fuse = skidl.Part(
-        "Device", "Polyfuse", footprint="Fuse:Fuse_1812_4532Metric"
-    )
+    fuse = skidl.Part("Device", "Polyfuse", footprint="Fuse:Fuse_1812_4532Metric")
     fuse.value = "2A"
     fuse_out = skidl.Net("FUSE_OUT")
     v5_in += fuse[1]
