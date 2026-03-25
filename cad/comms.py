@@ -77,7 +77,7 @@ def build_usb_uart(
     u_uart = skidl.Part(
         "Interface_USB",
         "CP2102N-Axx-xQFN20",
-        footprint="Package_DFN_QFN:QFN-20-1EP_3x3mm_P0.5mm_EP1.7x1.7mm",
+        footprint="Package_DFN_QFN:QFN-20-1EP_4x4mm_P0.5mm_EP2.5x2.5mm",
     )
     u_uart.value = "CP2102N"
 
