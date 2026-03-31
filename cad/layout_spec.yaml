@@ -23,7 +23,7 @@ blocks:
     position: [130, 10]
     components: [U1, R1, R2, R3, J3, C3]
     signal_flow: left_to_right
-    power_rail: "3V3"
+    power_rail: "+3V3"
     ground: true
     labels:
       left: [RS485_TX, RS485_RX]
@@ -32,7 +32,7 @@ blocks:
     position: [10, 80]
     components: [U2, J4, C4]
     signal_flow: left_to_right
-    power_rail: "3V3"
+    power_rail: "+3V3"
     ground: true
     labels:
       left: [UART_TX, UART_RX]
@@ -40,13 +40,13 @@ blocks:
   decoupling:
     position: [70, 85]
     components: [C5, C6, C7, C8]
-    power_rail: "3V3"
+    power_rail: "+3V3"
     ground: true
 
   io_headers:
     position: [130, 75]
     components: [R4, R5, J5, J6, J7]
-    power_rail: "3V3"
+    power_rail: "+3V3"
     ground: true
     labels:
       left: [SDA, SCL, MOSI, MISO, SCK, SPI_CS0]
