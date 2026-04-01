@@ -36,11 +36,13 @@ format = "black ."
 lint = "ruff check"
 checks = ["format", "lint"]
 notebook = "jupyter nbconvert --execute --inplace theory.ipynb"
-build = { cmd = "python cad/model.py", env = { PYTHONPATH = "." } }
+build = { cmd = "python cad/netlist/model.py", env = { PYTHONPATH = "." } }
 inspect-model = "bash -c 'nohup eeschema cad/cm4_carrier.kicad_sch &>/dev/null &'"
-validate-model = "bash -c 'kicad-cli sch erc cad/cm4_carrier.kicad_sch && if [ -f cad/cm4_carrier.kicad_pcb ]; then kicad-cli pcb drc cad/cm4_carrier.kicad_pcb; fi'"
+validate-model = "kicad-cli sch erc cad/cm4_carrier.kicad_sch"
+validate-asm = "bash -c 'if [ -f cad/cm4_carrier.kicad_pcb ]; then kicad-cli pcb drc cad/cm4_carrier.kicad_pcb; else echo \"No .kicad_pcb yet — route in pcbnew first\"; fi'"
 inspect-asm = "bash -c 'nohup kicad cad/cm4_carrier.kicad_pro &>/dev/null &'"
-drawings = "bash -c 'mkdir -p spec/drawings/gerbers && kicad-cli sch export svg cad/cm4_carrier.kicad_sch -b -e -n -o spec/drawings/ && kicad-cli sch export pdf cad/cm4_carrier.kicad_sch -b --drawing-sheet cad/drawing-sheet.kicad_wks -o spec/drawings/cm4_carrier.pdf && if [ -f cad/cm4_carrier.kicad_pcb ]; then kicad-cli pcb export gerbers cad/cm4_carrier.kicad_pcb -o spec/drawings/gerbers/ && kicad-cli pcb export drill cad/cm4_carrier.kicad_pcb -o spec/drawings/gerbers/ && kicad-cli pcb export step cad/cm4_carrier.kicad_pcb -o spec/drawings/cm4_carrier_pcb.step && kicad-cli pcb export svg cad/cm4_carrier.kicad_pcb -l F.Cu,B.Cu,Edge.Cuts,F.Silkscreen --black-and-white --exclude-drawing-sheet --page-size-mode 2 --mode-single -o spec/drawings/cm4_carrier_pcb.svg; fi'"
+generate-model = ["build", { cmd = "bash -c 'mkdir -p output/drawings && kicad-cli sch export svg cad/cm4_carrier.kicad_sch -b -e -n -o output/drawings/ && kicad-cli sch export pdf cad/cm4_carrier.kicad_sch -b --drawing-sheet cad/drawing-sheet.kicad_wks -o output/drawings/cm4_carrier.pdf'" }]
+generate-asm = "bash -c 'if [ -f cad/cm4_carrier.kicad_pcb ]; then mkdir -p output/gerbers && kicad-cli pcb export gerbers cad/cm4_carrier.kicad_pcb -o output/gerbers/ && kicad-cli pcb export drill cad/cm4_carrier.kicad_pcb -o output/gerbers/ && kicad-cli pcb export step cad/cm4_carrier.kicad_pcb -o output/cm4_carrier_pcb.step && kicad-cli pcb export svg cad/cm4_carrier.kicad_pcb -l F.Cu,B.Cu,Edge.Cuts,F.Silkscreen --black-and-white --exclude-drawing-sheet --page-size-mode 2 --mode-single -o output/drawings/cm4_carrier_pcb.svg; else echo \"No .kicad_pcb yet — route in pcbnew first\"; fi'"
 sim = "pytest -vv sim/"
 cover = "pytest -vv --cov sim/"
 review = "claude 'run code-reviewer agent against diff for quality and elegance'"

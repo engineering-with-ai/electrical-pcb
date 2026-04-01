@@ -29,7 +29,7 @@
   (tbtext 4 (name text4:Text) (pos 153.5 -2.5 ltcorner) (font (linewidth 0.35) (size 3.5 3.5)) (justify center))
   (tbtext 5 (name text5:Text) (pos 203.5 -2.5 ltcorner) (font (linewidth 0.35) (size 3.5 3.5)) (justify center))
   (tbtext 6 (name text6:Text) (pos 253.5 -2.5 ltcorner) (font (linewidth 0.35) (size 3.5 3.5)) (justify center))
-  (tbtext A4 (name text11:Text) (pos 253.5 -2.5 lbcorner) (font (linewidth 0.35) (size 3.5 3.5)) (justify center))
+  (tbtext %Z (name text11:Text) (pos 253.5 -2.5 lbcorner) (font (linewidth 0.35) (size 3.5 3.5)) (justify center))
   (tbtext A (name text7:Text) (pos -2.5 20 rtcorner) (font (linewidth 0.35) (size 3.5 3.5)) (justify center))
   (tbtext B (name text8:Text) (pos -2.5 70 rtcorner) (font (linewidth 0.35) (size 3.5 3.5)) (justify center))
   (tbtext C (name text9:Text) (pos -2.5 120 rtcorner) (font (linewidth 0.35) (size 3.5 3.5)) (justify center))

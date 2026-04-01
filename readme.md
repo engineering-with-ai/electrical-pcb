@@ -1,4 +1,4 @@
-# electrical-pcb
+# [electrical-pcb] ⚡
 
 ![](https://img.shields.io/gitlab/pipeline-status/engineering-with-ai/electrical-pcb?branch=main&logo=gitlab)
 ![](https://gitlab.com/engineering-with-ai/electrical-pcb/badges/main/coverage.svg)
@@ -43,6 +43,7 @@ theory.ipynb (sympy + pint) -> cad/model.py (SKiDL -> netlist) -> sim/ (power + 
 2. `cad/model.py` defines circuit in SKiDL, generates KiCad netlist
 3. `sim/model.py` validates power rail voltage, I2C rise time, RS-485 bias
 4. `sim/test_run.py` asserts simulation matches theory within tolerance
+5. `/generate-schematic` generates professional `.kicad_sch` from netlist + `layout_spec.yaml`
 
 ## Quick Start
 
@@ -50,11 +51,23 @@ theory.ipynb (sympy + pint) -> cad/model.py (SKiDL -> netlist) -> sim/ (power + 
 uv sync
 uv run poe checks          # ruff format + lint
 uv run poe notebook         # execute theory.ipynb
-uv run poe build            # SKiDL -> KiCad netlist
+uv run poe build            # SKiDL -> KiCad netlist + schematic
 uv run poe sim              # 4/4 tests pass
-uv run poe inspect-asm      # open KiCad project (for PCB layout)
-uv run poe drawings         # SVG + PDF to spec/drawings/
 ```
+
+## Code to Fabrication
+
+```
+/generate-schematic → validate-model → inspect-model → generate-model → inspect-asm → validate-asm → generate-asm
+```
+
+1. `/generate-schematic` — generate `.kicad_sch` from `model.py` + `layout_spec.yaml`
+2. `uv run poe validate-model` — ERC must pass with 0 errors
+3. `uv run poe inspect-model` — open in eeschema, tweak if needed, save
+4. `uv run poe generate-model` — export schematic SVG + PDF to `output/drawings/`
+5. `uv run poe inspect-asm` — open in pcbnew, place components, route traces, save `.kicad_pcb`
+6. `uv run poe validate-asm` — DRC must pass with 0 errors
+7. `uv run poe generate-asm` — export gerbers + drill + STEP to `output/`
 
 ## Structure
 
@@ -66,4 +79,4 @@ uv run poe drawings         # SVG + PDF to spec/drawings/
 - `cad/power.py` — power input section (polyfuse, MOSFET, bulk caps)
 - `cad/comms.py` — RS-485 (MAX3485) + USB-UART (CP2102N)
 - `cad/io_headers.py` — I2C, SPI, GPIO headers with pull-ups
-- `spec/drawings/` — exported schematic SVG/PDF, gerbers, STEP
+- `output/` — exported schematic SVG/PDF, gerbers, STEP

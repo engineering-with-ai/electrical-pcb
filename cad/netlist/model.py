@@ -18,13 +18,13 @@ for v in (
 
 import skidl  # noqa: E402
 
-from cad.comms import build_rs485, build_usb_uart  # noqa: E402
-from cad.io_headers import (  # noqa: E402
+from cad.netlist.comms import build_rs485, build_usb_uart  # noqa: E402
+from cad.netlist.io_headers import (  # noqa: E402
     build_gpio_header,
     build_i2c_header,
     build_spi_header,
 )
-from cad.power import build_power  # noqa: E402
+from cad.netlist.power import build_power  # noqa: E402
 
 NETLIST_PATH = "cad/cm4_carrier.net"
 
@@ -131,9 +131,9 @@ if __name__ == "__main__":
     build_netlist()
     print(f"Netlist: {NETLIST_PATH}")
 
-    from cad.schematic import build_schematic
+    from cad.schematic.schematic import build_schematic
 
     build_schematic()
-    from cad.schematic import SCHEMATIC_PATH
+    from cad.schematic.schematic import SCHEMATIC_PATH
 
     print(f"Schematic: {SCHEMATIC_PATH}")
