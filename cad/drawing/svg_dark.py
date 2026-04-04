@@ -8,6 +8,7 @@ from pathlib import Path
 
 
 def convert(src: Path, dst: Path) -> None:
+    """Invert black↔white colors in an SVG and add black background."""
     svg = src.read_text()
     # Reason: full black↔white inversion. Placeholder avoids double-swap.
     # Handles both XML attributes and CSS properties.
