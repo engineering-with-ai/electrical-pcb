@@ -7,6 +7,8 @@ CM4 carrier board — general-purpose Raspberry Pi Compute Module 4 carrier with
 
 A foundation board that exposes raw CM4 interfaces via headers. Not coupled to any specific application — downstream projects connect sensors, actuators, or other peripherals.
 
+**[View generated deliverables](output/)**
+
 ## Board Spec
 
 ```mermaid
