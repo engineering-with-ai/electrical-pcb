@@ -2,7 +2,7 @@
   (version "D")
   (design
     (source "model.py")
-    (date "04/02/2026 05:19 PM")
+    (date "04/04/2026 05:50 PM")
     (tool "SKiDL (2.2.1)")
     (sheet
       (number 1)
@@ -55,7 +55,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "lTdCaYMrBj")
+          (name "SKiDL Tag") "xbps_zrRLe")
         (field
           (name "SKiDL Line") "power.py:41"))
       (libsource
@@ -64,7 +64,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "300e7ab0-8ab8-572b-83e1-3fabb9439766"))
+      (tstamps "0b5b7bbe-c54b-58a7-8445-009f7d46d236"))
     (comp
       (ref "C2")
       (value "10uF")
@@ -78,7 +78,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "BBZB1AK6Wq")
+          (name "SKiDL Tag") "j9rQ7Deg4R")
         (field
           (name "SKiDL Line") "power.py:47"))
       (libsource
@@ -87,7 +87,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "b8a97a88-63a5-580a-9078-d5cefd22959d"))
+      (tstamps "9aeb90f3-0535-544d-8601-fe561832ac65"))
     (comp
       (ref "C3")
       (value "100nF")
@@ -101,7 +101,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "KgTPyeZTBN")
+          (name "SKiDL Tag") "wa2hONGiKV")
         (field
           (name "SKiDL Line") "comms.py:66"))
       (libsource
@@ -110,7 +110,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "3c787e70-84a6-5334-bf63-bb331e16384a"))
+      (tstamps "73380bb0-cc73-571c-ae69-850c61a2567d"))
     (comp
       (ref "C4")
       (value "100nF")
@@ -124,7 +124,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "5DRpb6HILA")
+          (name "SKiDL Tag") "_A6aTspGx6")
         (field
           (name "SKiDL Line") "comms.py:107"))
       (libsource
@@ -133,7 +133,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "7ba18733-e60d-5bdd-9621-f1e1a9ee3d39"))
+      (tstamps "b52105a5-130a-513c-9565-e75385cb4972"))
     (comp
       (ref "C5")
       (value "100nF")
@@ -147,7 +147,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "GJ9dLfJNg0")
+          (name "SKiDL Tag") "LfmRRl4Tyg")
         (field
           (name "SKiDL Line") "model.py:120"))
       (libsource
@@ -156,7 +156,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "89c4d763-f84d-5bfb-a74a-6d8331c0d39d"))
+      (tstamps "f8890cd0-d0b3-5f30-b3df-352dcc3b58ee"))
     (comp
       (ref "C6")
       (value "100nF")
@@ -170,7 +170,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "ahC1huOSkz")
+          (name "SKiDL Tag") "kefXV6UnBV")
         (field
           (name "SKiDL Line") "model.py:120"))
       (libsource
@@ -179,7 +179,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "791a8e2c-a46e-5443-8a3c-a452357d6cce"))
+      (tstamps "6177820f-385f-5ddb-8e40-b4148545cde1"))
     (comp
       (ref "C7")
       (value "100nF")
@@ -193,7 +193,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "Qqw47o3Jkx")
+          (name "SKiDL Tag") "3G7AXwcbRG")
         (field
           (name "SKiDL Line") "model.py:120"))
       (libsource
@@ -202,7 +202,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "2de53942-6938-5564-864d-1b2d2b700800"))
+      (tstamps "b1e939a3-8afd-543f-a922-29e12e96b2ce"))
     (comp
       (ref "C8")
       (value "100nF")
@@ -216,7 +216,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "7y2Kv_3HjN")
+          (name "SKiDL Tag") "AHiqRetM0t")
         (field
           (name "SKiDL Line") "model.py:120"))
       (libsource
@@ -225,7 +225,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "9ae82a89-713f-5db8-9540-2edc15e79506"))
+      (tstamps "65f7bb20-3b66-524c-8fa5-92b93f3d899b"))
     (comp
       (ref "F1")
       (value "2A")
@@ -239,7 +239,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "2T9FtBsx6Q")
+          (name "SKiDL Tag") "qbrLv5gl9X")
         (field
           (name "SKiDL Line") "power.py:22"))
       (libsource
@@ -248,7 +248,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "717fee4b-eca7-5343-9803-4f3751c08ea5"))
+      (tstamps "f8d25bc4-28f5-5ebb-b573-3e2fe8638212"))
     (comp
       (ref "J1")
       (value "5V_IN")
@@ -262,7 +262,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "fTqNHX9Veu")
+          (name "SKiDL Tag") "cxDVt2gFMc")
         (field
           (name "SKiDL Line") "power.py:12"))
       (libsource
@@ -271,7 +271,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "5d0120c2-61a6-51f5-9935-bd228f7505c9"))
+      (tstamps "6e7dfcd8-f602-5c3f-8e1b-642a0e6dc107"))
     (comp
       (ref "J2")
       (value "CM4")
@@ -285,7 +285,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "T1xzpxtewe")
+          (name "SKiDL Tag") "sJwdXia1MC")
         (field
           (name "SKiDL Line") "model.py:93"))
       (libsource
@@ -294,7 +294,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "482c4d4f-d93d-574c-b601-951683a06170"))
+      (tstamps "01636b39-6554-5648-8166-ee9b3ead4d1f"))
     (comp
       (ref "J3")
       (value "RS485")
@@ -308,7 +308,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "CZxFAvvtEg")
+          (name "SKiDL Tag") "ktcpBwJ2RZ")
         (field
           (name "SKiDL Line") "comms.py:54"))
       (libsource
@@ -317,7 +317,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "a93dade5-5f2d-5829-82ae-a4eafc0cc4ec"))
+      (tstamps "f33129f9-54bc-5669-9771-50150e151143"))
     (comp
       (ref "J4")
       (value "USB_DEBUG")
@@ -331,7 +331,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "ba1gON3EOf")
+          (name "SKiDL Tag") "bhjWJuRbAx")
         (field
           (name "SKiDL Line") "comms.py:95"))
       (libsource
@@ -340,7 +340,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "eb97ea12-5898-5d6f-9313-d1c7633a2e5b"))
+      (tstamps "ae7db598-1147-5a54-bce7-2742b500c07a"))
     (comp
       (ref "J5")
       (value "I2C")
@@ -354,7 +354,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "Z3Ycjr1e_9")
+          (name "SKiDL Tag") "jf0ACL2GzN")
         (field
           (name "SKiDL Line") "io_headers.py:28"))
       (libsource
@@ -363,7 +363,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "96cb7940-6d4f-566e-870f-d569e7346ddc"))
+      (tstamps "b9ef9c78-8200-5957-9caf-d2c7a1a1d7f4"))
     (comp
       (ref "J6")
       (value "SPI")
@@ -377,7 +377,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "PHiwcSFWt1")
+          (name "SKiDL Tag") "7I34XCsMkW")
         (field
           (name "SKiDL Line") "io_headers.py:49"))
       (libsource
@@ -386,7 +386,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "2b94dddd-dae7-5893-bd9e-b25359dc4339"))
+      (tstamps "344dbc8c-204a-505b-a07b-e6c178117540"))
     (comp
       (ref "J7")
       (value "GPIO")
@@ -400,7 +400,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "GRxdUGLcXG")
+          (name "SKiDL Tag") "_LoFP6McLR")
         (field
           (name "SKiDL Line") "io_headers.py:67"))
       (libsource
@@ -409,7 +409,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "97904804-84e5-596f-9d45-82f42341dc85"))
+      (tstamps "1fdff051-ffef-5b38-a91e-ed7c8179a2bc"))
     (comp
       (ref "Q1")
       (value "SI2301")
@@ -423,7 +423,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "ClTF6a6nez")
+          (name "SKiDL Tag") "FG3aYo_WtQ")
         (field
           (name "SKiDL Line") "power.py:32"))
       (libsource
@@ -432,7 +432,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "1f2fb44e-9812-538e-b7d9-e699482af9cc"))
+      (tstamps "60cc3fb3-8257-5de9-8167-b2b44dae5f5e"))
     (comp
       (ref "R1")
       (value "120")
@@ -446,7 +446,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "chLT685t6N")
+          (name "SKiDL Tag") "xQIDEyLe92")
         (field
           (name "SKiDL Line") "comms.py:34"))
       (libsource
@@ -455,7 +455,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "93e478a6-3795-5c96-8882-db5de18b1dfc"))
+      (tstamps "dcc83a5a-86b9-5483-a68d-43b31c215124"))
     (comp
       (ref "R2")
       (value "560")
@@ -469,7 +469,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "7ejgiUWJdR")
+          (name "SKiDL Tag") "u0XW0D8j5c")
         (field
           (name "SKiDL Line") "comms.py:41"))
       (libsource
@@ -478,7 +478,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "371cf3f4-52b0-5de8-94c1-621048f5a60e"))
+      (tstamps "6a203fac-f44b-5e46-948c-22577724d5b7"))
     (comp
       (ref "R3")
       (value "560")
@@ -492,7 +492,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "CXurMpBNmw")
+          (name "SKiDL Tag") "yBzWaHo94L")
         (field
           (name "SKiDL Line") "comms.py:47"))
       (libsource
@@ -501,7 +501,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "627912b5-fc5b-5e40-8fb5-50f135209d61"))
+      (tstamps "f0777794-d0ba-538f-9991-ade406d47ac2"))
     (comp
       (ref "R4")
       (value "2.2k")
@@ -515,7 +515,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "ZO44KJr0g3")
+          (name "SKiDL Tag") "wWm6Bi8iwk")
         (field
           (name "SKiDL Line") "io_headers.py:15"))
       (libsource
@@ -524,7 +524,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "22470894-05b5-5de8-bf40-307e88f1b56a"))
+      (tstamps "58c2c4cc-f828-5ee1-92ad-33482c403292"))
     (comp
       (ref "R5")
       (value "2.2k")
@@ -538,7 +538,7 @@
         (field
           (name "Datasheet") "~")
         (field
-          (name "SKiDL Tag") "k9fTWC_TJ9")
+          (name "SKiDL Tag") "NDOzBZymDj")
         (field
           (name "SKiDL Line") "io_headers.py:21"))
       (libsource
@@ -547,7 +547,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "db53119e-b1f3-571b-8f17-5ce8b4d83584"))
+      (tstamps "a8664aa8-548b-5a1d-a668-f8641114e063"))
     (comp
       (ref "U1")
       (value "MAX3485")
@@ -561,7 +561,7 @@
         (field
           (name "Datasheet") "https://datasheets.maximintegrated.com/en/ds/MAX3483-MAX3491.pdf")
         (field
-          (name "SKiDL Tag") "37uidy2mKG")
+          (name "SKiDL Tag") "BzDsl3dDKz")
         (field
           (name "SKiDL Line") "comms.py:15"))
       (libsource
@@ -570,7 +570,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "17b43382-84c1-5da4-b387-7b30d559f8c8"))
+      (tstamps "521f48eb-2aed-57c5-af74-fd327463e088"))
     (comp
       (ref "U2")
       (value "CP2102N")
@@ -584,7 +584,7 @@
         (field
           (name "Datasheet") "https://www.silabs.com/documents/public/data-sheets/cp2102n-datasheet.pdf")
         (field
-          (name "SKiDL Tag") "P_i4Up_fZZ")
+          (name "SKiDL Tag") "xaQFbGDwio")
         (field
           (name "SKiDL Line") "comms.py:77"))
       (libsource
@@ -593,7 +593,7 @@
       (sheetpath
         (names "/")
         (tstamps "/"))
-      (tstamps "02337742-03ec-52ff-be15-bac049c613c1")))
+      (tstamps "86c6abba-10c0-579a-b8bc-e0d333cf7d9a")))
   (nets
     (net
       (code 1)
