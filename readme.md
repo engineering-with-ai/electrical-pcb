@@ -73,9 +73,8 @@ uv run poe generate-model           # SVG + dark SVG + drawing PDF
 
 # 3. pcb layout
 # WRENCH: open pcbnew, press F8 (Update PCB from Schematic), save, close
-/layout-pcb                          # place + autoroute + DRC + review SVG
+/layout-pcb                          # place + autoroute + ground pour + DRC + review SVG
 # WRENCH: review SVG, adjust layout_spec.yaml if needed, re-run /layout-pcb
-# WRENCH: open pcbnew, add ground pour (B key), save
 
 # 4. validate + export
 uv run poe validate-asm              # DRC 0 errors

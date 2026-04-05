@@ -122,15 +122,36 @@ Read the PNG and check:
 
 **If clean:** proceed to Phase 5.
 
-## Phase 5: Ground Pour (manual in pcbnew)
+## Phase 5: Ground Pour
 
-After routing converges, add ground copper fill:
-1. Open board: `uv run poe inspect-asm`
-2. Select copper zone tool (right toolbar)
-3. Set net to GND, layer to F.Cu
-4. Draw rectangle around entire board → press B to fill
-5. Repeat on B.Cu
-6. Save → re-run `uv run poe validate-asm`
+Add ground copper fill on both layers programmatically:
+
+```python
+import pcbnew
+
+board = pcbnew.LoadBoard("cad/cm4_carrier.kicad_pcb")
+gnd_net = board.GetNetInfo().GetNetItem("GND")
+bb = board.GetBoardEdgesBoundingBox()
+margin = pcbnew.FromMM(0.5)
+
+for layer in [pcbnew.F_Cu, pcbnew.B_Cu]:
+    zone = pcbnew.ZONE(board)
+    zone.SetNet(gnd_net)
+    zone.SetLayer(layer)
+    outline = zone.Outline()
+    outline.NewOutline()
+    outline.Append(bb.GetLeft() + margin, bb.GetTop() + margin)
+    outline.Append(bb.GetRight() - margin, bb.GetTop() + margin)
+    outline.Append(bb.GetRight() - margin, bb.GetBottom() - margin)
+    outline.Append(bb.GetLeft() + margin, bb.GetBottom() - margin)
+    board.Add(zone)
+
+filler = pcbnew.ZONE_FILLER(board)
+filler.Fill(board.Zones())
+board.Save("cad/cm4_carrier.kicad_pcb")
+```
+
+Then re-run DRC: `uv run poe validate-asm`
 
 ## Phase 6: Final Export
 
