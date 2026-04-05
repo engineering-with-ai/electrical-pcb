@@ -9,7 +9,7 @@ A foundation board that exposes raw CM4 interfaces via headers. Not coupled to a
 
 **[View generated deliverables](output/)**
 
-## Board Spec
+## 📋 Board Spec
 
 ```mermaid
 graph LR
@@ -35,7 +35,7 @@ graph LR
     style GPIO fill:#94a,stroke:#333
 ```
 
-## Workflow
+## 🔄 Workflow
 
 ```
 theory.ipynb (sympy + pint) -> cad/model.py (SKiDL -> netlist) -> sim/ (power + signal integrity) -> pytest (assert vs theory)
@@ -47,7 +47,7 @@ theory.ipynb (sympy + pint) -> cad/model.py (SKiDL -> netlist) -> sim/ (power + 
 4. `sim/test_run.py` asserts simulation matches theory within tolerance
 5. `/generate-schematic` generates professional `.kicad_sch` from netlist + `layout_spec.yaml`
 
-## Quick Start
+## 🚀 Quick Start
 
 ```bash
 uv sync
@@ -57,7 +57,7 @@ uv run poe build            # SKiDL -> KiCad netlist + schematic
 uv run poe sim              # 4/4 tests pass
 ```
 
-## Code to Fabrication
+## 🏭 Code to Fabrication
 
 Everything is CLI or Claude skill except 3 manual steps marked with a wrench.
 
@@ -75,19 +75,20 @@ Everything is CLI or Claude skill except 3 manual steps marked with a wrench.
  6. /layout-pcb                      → place + autoroute + ground pour + DRC + review SVG
 
     ┌──────────────────────────────────────────────────────┐
-    │  HUMAN: review SVG, tweak layout_spec.yaml, re-run  │
+    │  HUMAN: review SVG, tweak pcb_placement.yaml, re-run │
     └──────────────────────────────────────────────────────┘
 
  7. uv run poe validate-asm          → DRC 0 errors
  8. uv run poe generate-asm          → gerbers + BOM + CPL + STEP
 ```
 
-## Structure
+## 📁 Structure
 
 - `theory.ipynb` — power budget + signal integrity derivation
 - `sim/` — simulation + pytest assertions against theory
 - `cad/netlist/` — SKiDL circuit definition (model.py, power.py, comms.py, io_headers.py)
-- `cad/layout_spec.yaml` — schematic + PCB layout config (block positions, placement)
+- `cad/layout_spec.yaml` — schematic layout + block definitions
+- `cad/pcb_placement.yaml` — AI-generated PCB component positions
 - `cad/drawing-sheet.kicad_wks` — custom EWAI title block
 - `cad/drawing/` — SVG dark mode conversion, PCB placement script
 - `output/drawings/` — schematic SVGs (light + dark), drawing PDF

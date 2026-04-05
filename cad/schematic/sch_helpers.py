@@ -137,7 +137,9 @@ def stub_label(
     sch.add_label(name, position=end, rotation=rotation)
 
 
-def stub_pwr(sch, pin: Pos, symbol: str, pwr: dict, dx: int = 0, dy: int = -4) -> None:
+def stub_pwr(
+    sch, pin: Pos, symbol: str, pwr: dict, dx: int = 0, dy: int = -4
+) -> None:
     """Wire stub from pin to power symbol."""
     end = (pin[0] + dx, pin[1] + dy)
     sch.add_wire(start=pin, end=end)

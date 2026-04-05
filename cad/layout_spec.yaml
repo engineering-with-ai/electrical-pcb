@@ -11,12 +11,6 @@ blocks:
     ground: true
     labels:
       right: [5V_RAIL]
-    internal_positions:
-      J1: [12, 14]
-      F1: [28, 14]
-      Q1: [44, 14]
-      C1: [60, 14]
-      C2: [70, 14]
 
   cm4:
     position: [82, 32]
@@ -33,13 +27,6 @@ blocks:
     ground: true
     labels:
       left: [RS485_TX, RS485_RX]
-    internal_positions:
-      U1: [134, 28]
-      R1: [156, 22]
-      R2: [166, 20]
-      R3: [166, 36]
-      J3: [178, 28]
-      C3: [122, 16]
 
   usb_uart:
     position: [8, 64]
@@ -49,10 +36,6 @@ blocks:
     ground: true
     labels:
       left: [UART_TX, UART_RX]
-    internal_positions:
-      J4: [14, 72]
-      U2: [44, 104]
-      C4: [62, 76]
 
   io_headers:
     position: [112, 62]
@@ -61,12 +44,6 @@ blocks:
     ground: true
     labels:
       left: [SDA, SCL, MOSI, MISO, SCK, SPI_CS0]
-    internal_positions:
-      R4: [118, 70]
-      R5: [126, 70]
-      J5: [138, 72]
-      J6: [156, 72]
-      J7: [176, 74]
 
   decoupling:
     position: [112, 100]
@@ -74,50 +51,13 @@ blocks:
     power_rail: "+3V3"
     ground: true
 
+pcb:
+  board_size: [100, 80]
+  board_origin: [100, 80]
+
 layout_rules:
   min_component_spacing: 8
   power_symbol_position: top
   ground_symbol_position: bottom
   decoupling_near_ic: true
   routing: labels
-
-pcb_placement:
-  board_size: [100, 80]
-  board_origin: [100, 80]
-  blocks:
-    power:
-      components:
-        J1: [3, 20, 0]
-        F1: [15, 12, 0]
-        Q1: [15, 22, 0]
-        C1: [25, 12, 0]
-        C2: [25, 22, 0]
-    cm4:
-      components:
-        J2: [42, 28, 0]
-    rs485:
-      components:
-        U1: [75, 18, 0]
-        R1: [68, 10, 90]
-        R2: [72, 10, 90]
-        R3: [76, 10, 90]
-        J3: [92, 18, 0]
-        C3: [68, 25, 0]
-    usb_uart:
-      components:
-        U2: [18, 55, 0]
-        J4: [3, 55, 90]
-        C4: [28, 55, 0]
-    io_headers:
-      components:
-        J5: [75, 55, 0]
-        J6: [85, 55, 0]
-        J7: [92, 56, 0]
-        R4: [68, 50, 90]
-        R5: [72, 50, 90]
-    decoupling:
-      components:
-        C5: [35, 8, 0]
-        C6: [42, 8, 0]
-        C7: [49, 8, 0]
-        C8: [56, 8, 0]

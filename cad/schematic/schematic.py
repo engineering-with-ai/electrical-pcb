@@ -10,9 +10,9 @@ from pathlib import Path
 import kicad_sch_api as ksa
 import yaml
 
-from cad.schematic.sch_mcu import place_cm4_block
 from cad.schematic.sch_comms import place_rs485_block, place_usb_uart_block
 from cad.schematic.sch_io import place_decoupling_block, place_io_block
+from cad.schematic.sch_mcu import place_cm4_block
 from cad.schematic.sch_power import place_power_block
 
 LAYOUT_SPEC_PATH = Path("cad/layout_spec.yaml")
