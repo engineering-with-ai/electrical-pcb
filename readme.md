@@ -61,24 +61,25 @@ uv run poe sim              # 4/4 tests pass
 
 Everything is CLI or Claude skill except 3 manual steps marked with a wrench.
 
-```bash
-# 1. theory + sim
-uv run poe build                    # SKiDL -> netlist + schematic
-uv run poe sim                      # 4/4 pass
+```
+ 1. uv run poe build                 → SKiDL netlist + schematic
+ 2. uv run poe sim                   → 4/4 tests pass
+ 3. /generate-schematic              → professional .kicad_sch
+ 4. uv run poe validate-model        → ERC 0 errors
+ 5. uv run poe generate-model        → schematic SVG + dark SVG + drawing PDF
 
-# 2. schematic
-/generate-schematic                  # professional .kicad_sch
-uv run poe validate-model           # ERC 0 errors
-uv run poe generate-model           # SVG + dark SVG + drawing PDF
+    ┌──────────────────────────────────────────────────────┐
+    │  MANUAL: open pcbnew, press F8, save, close          │
+    └──────────────────────────────────────────────────────┘
 
-# 3. pcb layout
-# WRENCH: open pcbnew, press F8 (Update PCB from Schematic), save, close
-/layout-pcb                          # place + autoroute + ground pour + DRC + review SVG
-# WRENCH: review SVG, adjust layout_spec.yaml if needed, re-run /layout-pcb
+ 6. /layout-pcb                      → place + autoroute + ground pour + DRC + review SVG
 
-# 4. validate + export
-uv run poe validate-asm              # DRC 0 errors
-uv run poe generate-asm              # gerbers + BOM + CPL + STEP
+    ┌──────────────────────────────────────────────────────┐
+    │  MANUAL: review SVG, tweak layout_spec.yaml, re-run  │
+    └──────────────────────────────────────────────────────┘
+
+ 7. uv run poe validate-asm          → DRC 0 errors
+ 8. uv run poe generate-asm          → gerbers + BOM + CPL + STEP
 ```
 
 ## Structure
