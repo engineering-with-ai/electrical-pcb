@@ -80,3 +80,44 @@ layout_rules:
   ground_symbol_position: bottom
   decoupling_near_ic: true
   routing: labels
+
+pcb_placement:
+  board_size: [100, 80]
+  board_origin: [100, 80]
+  blocks:
+    power:
+      components:
+        J1: [3, 20, 0]
+        F1: [15, 12, 0]
+        Q1: [15, 22, 0]
+        C1: [25, 12, 0]
+        C2: [25, 22, 0]
+    cm4:
+      components:
+        J2: [42, 28, 0]
+    rs485:
+      components:
+        U1: [75, 18, 0]
+        R1: [68, 10, 90]
+        R2: [72, 10, 90]
+        R3: [76, 10, 90]
+        J3: [92, 18, 0]
+        C3: [68, 25, 0]
+    usb_uart:
+      components:
+        U2: [18, 55, 0]
+        J4: [3, 55, 90]
+        C4: [28, 55, 0]
+    io_headers:
+      components:
+        J5: [75, 55, 0]
+        J6: [85, 55, 0]
+        J7: [92, 56, 0]
+        R4: [68, 50, 90]
+        R5: [72, 50, 90]
+    decoupling:
+      components:
+        C5: [35, 8, 0]
+        C6: [42, 8, 0]
+        C7: [49, 8, 0]
+        C8: [56, 8, 0]

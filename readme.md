@@ -69,13 +69,13 @@ Everything is CLI or Claude skill except 3 manual steps marked with a wrench.
  5. uv run poe generate-model        → schematic SVG + dark SVG + drawing PDF
 
     ┌──────────────────────────────────────────────────────┐
-    │  MANUAL: open pcbnew, press F8, save, close          │
+    │  HUMAN : open pcbnew, press F8, save, close          │
     └──────────────────────────────────────────────────────┘
 
  6. /layout-pcb                      → place + autoroute + ground pour + DRC + review SVG
 
     ┌──────────────────────────────────────────────────────┐
-    │  MANUAL: review SVG, tweak layout_spec.yaml, re-run  │
+    │  HUMAN: review SVG, tweak layout_spec.yaml, re-run  │
     └──────────────────────────────────────────────────────┘
 
  7. uv run poe validate-asm          → DRC 0 errors
