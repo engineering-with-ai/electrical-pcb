@@ -3,9 +3,9 @@
 ![](https://img.shields.io/gitlab/pipeline-status/engineering-with-ai/electrical-pcb?branch=main&logo=gitlab)
 ![](https://gitlab.com/engineering-with-ai/electrical-pcb/badges/main/coverage.svg)
 
-CM4 carrier board — general-purpose Raspberry Pi Compute Module 4 carrier with 5V screw terminal input, polyfuse + reverse polarity protection, CP2102N USB-UART debug, MAX3485 RS-485, I2C/SPI/GPIO headers on 2.54mm pitch, 100x80mm 2-layer board.
+CM4 carrier board — Raspberry Pi Compute Module 4 carrier for an outdoor self-contained sensor system with computer vision, thermal imaging, cellular uplink, and solar + battery power. 5V screw terminal input, polyfuse + reverse polarity protection, CP2102N USB-UART debug, MAX3485 RS-485, I2C/SPI/GPIO headers on 2.54mm pitch, 100x80mm 2-layer board.
 
-A foundation board that exposes raw CM4 interfaces via headers. Not coupled to any specific application — downstream projects connect sensors, actuators, or other peripherals.
+Foundation board that exposes raw CM4 interfaces via headers. Downstream boards connect RGB camera (CSI), FLIR Lepton thermal sensor (SPI), cellular modem (RS-485 Modbus), and solar charge controller (I2C BMS telemetry).
 
 **[View generated deliverables](output/)**
 
