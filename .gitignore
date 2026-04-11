@@ -47,4 +47,5 @@ skidl_REPL.*
 *.lck
 fp-info-cache
 *-erc.rpt
+*-drc.rpt
 .claude/settings.local.json
